@@ -22,7 +22,7 @@ This repo is a hands-on lab for learning how to set up Jenkins and understand CI
 |---------|----------|------|--------------|
 | Go app | Go 1.21 | `go-app/` | `golang:1.21-alpine` |
 | PHP app | PHP 8.2 | `php-app/` | `php:8.2-cli-alpine` |
-| Python app | Python | `python-app/` | TBD |
+| Python app | Python 3.12 | `python-app/` | `python:3.12-alpine` |
 
 ### How it works
 
