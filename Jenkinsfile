@@ -42,9 +42,8 @@ pipeline {
                 echo '=== Go: Test & Build ==='
                 sh 'go version'
                 dir('go-app') {
-                    // sh 'go test ./...'
-                    // sh 'go build -o app main.go'
-                    echo 'Simulating Go build...'
+                    sh 'go build -o app main.go'
+                    sh './app'
                 }
             }
         }
@@ -60,8 +59,7 @@ pipeline {
                 echo '=== PHP: Test ==='
                 sh 'php -v'
                 dir('php-app') {
-                    // sh 'php vendor/bin/phpunit'
-                    echo 'Simulating PHP tests...'
+                    sh 'php index.php'
                 }
             }
         }
@@ -77,8 +75,7 @@ pipeline {
                 echo '=== Python: Test ==='
                 sh 'python --version'
                 dir('python-app') {
-                    // sh 'python -m pytest'
-                    echo 'Simulating Python tests...'
+                    sh 'python main.py'
                 }
             }
         }
