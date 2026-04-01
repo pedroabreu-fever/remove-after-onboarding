@@ -38,13 +38,16 @@ pipeline {
                     reuseNode true
                 }
             }
+            environment {
+                GOCACHE = "${WORKSPACE}/.cache/go-build"
+                GOPATH = "${WORKSPACE}/.cache/go"
+            }
             steps {
                 echo '=== Go: Test & Build ==='
                 sh 'go version'
                 dir('go-app') {
-                    // sh 'go test ./...'
-                    // sh 'go build -o app main.go'
-                    echo 'Simulating Go build...'
+                    sh 'go build -o app main.go'
+                    sh './app'
                 }
             }
         }
@@ -60,8 +63,7 @@ pipeline {
                 echo '=== PHP: Test ==='
                 sh 'php -v'
                 dir('php-app') {
-                    // sh 'php vendor/bin/phpunit'
-                    echo 'Simulating PHP tests...'
+                    sh 'php index.php'
                 }
             }
         }
@@ -77,8 +79,7 @@ pipeline {
                 echo '=== Python: Test ==='
                 sh 'python --version'
                 dir('python-app') {
-                    // sh 'python -m pytest'
-                    echo 'Simulating Python tests...'
+                    sh 'python main.py'
                 }
             }
         }
@@ -92,10 +93,10 @@ pipeline {
             }
         }
         success {
-            echo 'Pipeline finished successfully!'
+            githubNotify context: 'Pruebas y Build', status: 'SUCCESS', description: 'Todo verde'
         }
         failure {
-            echo 'Pipeline failed. Check the container logs for details.'
+            githubNotify context: 'Pruebas y Build', status: 'FAILURE', description: 'Fallaron los tests'
         }
     }
 }
