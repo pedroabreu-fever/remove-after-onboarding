@@ -89,10 +89,10 @@ pipeline {
             }
         }
         success {
-            echo 'Pipeline finished successfully!'
+            githubNotify context: 'Pruebas y Build', status: 'SUCCESS', description: 'Todo verde'
         }
         failure {
-            echo 'Pipeline failed. Check the container logs for details.'
+            githubNotify context: 'Pruebas y Build', status: 'FAILURE', description: 'Fallaron los tests'
         }
     }
 }
