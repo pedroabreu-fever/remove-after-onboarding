@@ -38,6 +38,10 @@ pipeline {
                     reuseNode true
                 }
             }
+            environment {
+                GOCACHE = "${WORKSPACE}/.cache/go-build"
+                GOPATH = "${WORKSPACE}/.cache/go"
+            }
             steps {
                 echo '=== Go: Test & Build ==='
                 sh 'go version'
